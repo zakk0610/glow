@@ -7,6 +7,7 @@ enable_testing()
 
 option(GLOW_WITH_CPU "Build the LLVM-based JIT CPU backend" ON)
 option(GLOW_WITH_OPENCL "Build the OpenCL backend" ON)
+option(GLOW_WITH_SOPHON "Build the Sophon backend" OFF)
 option(GLOW_BUILD_EXAMPLES "Build the examples" ON)
 option(GLOW_BUILD_TESTS "Build the tests" ON)
 option(GLOW_WITH_BUNDLES "Build bundles" OFF)
@@ -65,6 +66,10 @@ if (GLOW_WITH_OPENCL)
   add_definitions(-DGLOW_WITH_OPENCL=1)
   find_package(OpenCL REQUIRED)
 endif ()
+
+if (GLOW_WITH_SOPHON)
+  add_definitions(-DGLOW_WITH_SOPHON=1)
+endif()
 
 # Prefer LLVM 7.
 find_package(LLVM 7 CONFIG)
