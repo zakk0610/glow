@@ -1,0 +1,46 @@
+# for Sophon env
+FROM ubuntu:16.04
+
+LABEL version="0.1"
+
+# Install Glow dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        wget \
+        unzip \
+        tar \
+        clang-6.0 \
+        llvm-6.0 \
+        llvm-6.0-dev \
+        llvm-6.0-tools \
+        libpng-dev \
+        python-dev \
+        ninja-build \
+# onnx dependencies
+        protobuf-compiler \
+        libprotoc-dev \
+# sophon dependencies
+        libgoogle-glog-dev \
+        && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+RUN wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py && \
+    python get-pip.py && \
+    rm get-pip.py
+
+# Redirect clang
+RUN ln -s /usr/bin/clang-6.0 /usr/bin/clang
+RUN ln -s /usr/bin/clang++-6.0 /usr/bin/clang++
+
+# Install ninja and (newest version of) cmake through pip
+RUN pip --no-cache-dir install \
+        ninja \
+        cmake \
+        lit
+
+RUN cd /tmp && \
+    wget --no-check-certificate https://sophon-file.bitmain.com.cn/sophon-prod/drive/18/11/04/00/bmtap2-bm1880-usb_1.0.2.2.tar.gz.zip && \
+    unzip -p bmtap2-bm1880-usb_1.0.2.2.tar.gz.zip | tar zx && \
+    cd bmtap2-bm1880-usb_1.0.2.2 && \
+    ./install.sh
