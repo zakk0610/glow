@@ -4,4 +4,5 @@ set -exu
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
 
-docker build -f Dockerfile -t pytorch/glow:0.1 .
+./build.sh
+docker build -f Dockerfile.sophon -t pytorch/glow/sophon:0.1 .
