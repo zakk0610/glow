@@ -182,9 +182,8 @@ IRBuilder::createAllocActivationInst(llvm::StringRef name, ElemKind elemTy,
 }
 
 WeightVar *IRBuilder::createWeightVar(ElemKind elemTy,
-                                      llvm::ArrayRef<size_t> dims,
-                                      float scale, int32_t offset,
-                                      llvm::StringRef name,
+                                      llvm::ArrayRef<size_t> dims, float scale,
+                                      int32_t offset, llvm::StringRef name,
                                       WeightVar::MutabilityKind m) {
   auto T = F_->getGraph()->getParent()->uniqueType(elemTy, dims, scale, offset);
   return createWeightVar(T, name, m);
