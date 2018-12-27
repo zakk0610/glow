@@ -22,7 +22,6 @@
 namespace glow {
 extern llvm::cl::OptionCategory SophonBackendCat;
 extern llvm::cl::opt<std::string> bmodelFileNameOpt;
-extern llvm::cl::opt<bool> enableLayerGroupOpt;
 } // namespace glow
 
 #endif

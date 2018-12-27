@@ -260,22 +260,17 @@ TEST(BM1880ExapndCodeGenTest, LIRFC) {
   sophon::runInsertLoadStorePass(IR.get());
   BM1880ExpandSophonInst(IR.get(), allocInfo).run();
 
+  // clang-format off
   // 5. Hand-coded for Local Memory allocation
   // expected MI LIR
-  // 0 %fc_save_output = allocactivation  { Ty: i8[S:1.0000
-  // O:0][-128.000,127.000]<1 x 1024>} 1 %fc_fc_l = allocactivation  { Ty:
-  // i8[S:1.0000 O:0][-128.000,127.000]<1 x 1024>} 2 %fc_fc_l_load1 =
-  // sophonmigdmaglobaltolocal @out %fc_fc_l, @in %fc_l { ShapeNCHW: [1, 32, 1,
-  // 32], GlobalStrideNCH: [1024, 32, 32], IsGlobalWeightSpace: 0,
-  // IsLocalAligned: 1} 3 %fc_fc_r = allocactivation  { Ty: i8[S:1.0000
-  // O:0][-128.000,127.000]<1024 x 1024>} 4 %fc_fc_r_load1 =
-  // sophonmigdmaglobaltolocal @out %fc_fc_r, @in %fc_r { ShapeNCHW: [1024, 32,
-  // 1, 32], GlobalStrideNCH: [1024, 32, 32], IsGlobalWeightSpace: 1,
-  // IsLocalAligned: 1} 5 %fc_fc_b = allocactivation  { Ty: i16[S:1.0000
-  // O:0][-32768.000,32767.000]<1024>} 6 %fc_fc_b_load1 =
-  // sophonmigdmaglobaltolocal @out %fc_fc_b, @in %fc_b { ShapeNCHW: [2, 32, 1,
-  // 32], GlobalStrideNCH: [1024, 32, 32], IsGlobalWeightSpace: 1,
-  // IsLocalAligned: 0}
+  // 0 %fc_save_output = allocactivation  { Ty: i8[S:1.0000 O:0][-128.000,127.000]<1 x 1024>}
+  // 1 %fc_fc_l = allocactivation  { Ty: i8[S:1.0000 O:0][-128.000,127.000]<1 x 1024>}
+  // 2 %fc_fc_l_load1 =  sophonmigdmaglobaltolocal @out %fc_fc_l, @in %fc_l { ShapeNCHW: [1, 32, 1, 32], GlobalStrideNCH: [1024, 32, 32], IsGlobalWeightSpace: 0, IsLocalAligned: 1}
+  // 3 %fc_fc_r = allocactivation  { Ty: i8[S:1.0000 O:0][-128.000,127.000]<1024 x 1024>}
+  // 4 %fc_fc_r_load1 = sophonmigdmaglobaltolocal @out %fc_fc_r, @in %fc_r { ShapeNCHW: [1024, 32, 1, 32], GlobalStrideNCH: [1024, 32, 32], IsGlobalWeightSpace: 1, IsLocalAligned: 1}
+  // 5 %fc_fc_b = allocactivation  { Ty: i16[S:1.0000 O:0][-32768.000,32767.000]<1024>}
+  // 6 %fc_fc_b_load1 = sophonmigdmaglobaltolocal @out %fc_fc_b, @in %fc_b { ShapeNCHW: [2, 32, 1, 32], GlobalStrideNCH: [1024, 32, 32], IsGlobalWeightSpace: 1, IsLocalAligned: 0}
+  // clang-foramt on
 
   IR->dump();
   // f_save_output
