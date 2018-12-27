@@ -18,6 +18,15 @@ add_custom_command(OUTPUT
                       ${INSTR_BLD_HDR} ${INSTR_BLD_SRC} ${INSTR_IR_GEN}
                     DEPENDS InstrGen
                     COMMENT "InstrGen: Generating instructions." VERBATIM)
+add_custom_target(AutoGenInstr
+                    DEPENDS
+                      "${INSTR_HDR}"
+                      "${INSTR_SRC}"
+                      "${INSTR_DEF}"
+                      "${INSTR_BLD_HDR}"
+                      "${INSTR_BLD_SRC}"
+                      "${INSTR_IR_GEN}")
+add_dependencies(AutoGen AutoGenInstr)
 
 # AutoGenNodes
 set(NODES_HDR ${GLOW_BINARY_DIR}/glow/AutoGenNodes.h)
@@ -31,6 +40,12 @@ add_custom_command(OUTPUT
                    COMMAND NodeGen ${NODES_HDR} ${NODES_SRC} ${NODES_DEF}
                    DEPENDS NodeGen
                    COMMENT "NodeGen: Generating nodes." VERBATIM)
+add_custom_target(AutoGenNode
+                   DEPENDS
+                     "${NODES_HDR}"
+                     "${NODES_SRC}"
+                     "${NODES_DEF}")
+add_dependencies(AutoGen AutoGenNode)
 
 add_library(Graph
             ${NODES_HDR}
@@ -48,6 +63,7 @@ add_library(Graph
             NodeValue.cpp
             Graph.cpp
             Grad.cpp)
+add_dependencies(Graph AutoGen)
 
 target_link_libraries(Graph
                       PUBLIC
