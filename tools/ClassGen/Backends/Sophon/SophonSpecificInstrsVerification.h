@@ -14,24 +14,29 @@
  * limitations under the License.
  */
 
-void SophonConvolutionQ8Node::verify() const {
+bool SophonConvolutionQ8Node::verify() const {
   // TBD
+   return true;
 }
 
-void SophonFullyConnectedQ8Node::verify() const {
+bool SophonFullyConnectedQ8Node::verify() const {
   // TBD
+   return true;
 }
 
-void SophonReluQ8Node::verify() const {
+bool SophonReluQ8Node::verify() const {
   // TBD
+   return true;
 }
 
-void SophonMaxPoolQ8Node::verify() const {
+bool SophonMaxPoolQ8Node::verify() const {
   // TBD
+   return true;
 }
 
-void SophonAvgPoolQ8Node::verify() const {
+bool SophonAvgPoolQ8Node::verify() const {
   // TBD
+   return true;
 }
 
 void SophonLoadInst::verify() const {
@@ -43,21 +48,21 @@ void SophonStoreInst::verify() const {
 }
 
 #if 0
-void SophonFakeParallelStartInst::verify() const {}
-void SophonFakeParallelEndInst::verify() const {}
+bool SophonFakeParallelStartInst::verify() const {}
+bool SophonFakeParallelEndInst::verify() const {}
 
-void TL_AllocInst::verify() const {}
-void SophonDeallocLocalTensorInst::verify() const {}
+bool TL_AllocInst::verify() const {}
+bool SophonDeallocLocalTensorInst::verify() const {}
 
-void SophonLoadStrideInst::verify() const {}
-void SophonLoadInst::verify() const {}
-void SophonStoreStrideInst::verify() const {}
-void SophonStoreInst::verify() const {}
+bool SophonLoadStrideInst::verify() const {}
+bool SophonLoadInst::verify() const {}
+bool SophonStoreStrideInst::verify() const {}
+bool SophonStoreInst::verify() const {}
 
-void SophonLocalMacInst::verify() const {}
-void SophonLocalMaxInst::verify() const {}
-void SophonLocalCmpInst::verify() const {}
-void SophonLocalMulInst::verify() const {}
+bool SophonLocalMacInst::verify() const {}
+bool SophonLocalMaxInst::verify() const {}
+bool SophonLocalCmpInst::verify() const {}
+bool SophonLocalMulInst::verify() const {}
 
-void SophonLocalReshapeInst::verify() const {}
+bool SophonLocalReshapeInst::verify() const {}
 #endif
